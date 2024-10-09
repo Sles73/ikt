@@ -14,17 +14,13 @@ def unzip_zip_files(folder_path):
         if file.endswith(".zip"):
             file_path = os.path.join(folder_path, file)
             paths.append(file_path)
-            with zipfile.ZipFile(file_path, 'r') as zip_ref:
-                zip_ref.extractall(folder_path)
-                print(f"Unzipped {file_path}")
-            
-            with open(file_path, 'r+') as csvfile:
-                csvreader = csv.reader(csvfile)
-                csvwriter = csv.writer(csvfile)
-
-                for row in csvreader:
-                    new_row = [item.replace('�', '') for item in row]
-                    csvwriter.writerow(new_row)
+            print(file_path)
+            try:
+                with zipfile.ZipFile(file_path, 'r') as zip_ref:
+                    zip_ref.extractall(folder_path)
+                    print(f"Unzipped {file_path}")
+            except Exception as e:
+                print(e)
     
     return paths
 
