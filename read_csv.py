@@ -1,17 +1,11 @@
 import csv
 
 
-
 class Table:
     def __init__(self,name):
           self.name = name
           self.columns = []
           self.data = [[]]
-
-
-
-
-
 
 
 def csv_to_table_class(path,tables,limiter=False):
@@ -101,35 +95,24 @@ def make_blob(id,stanice,zemDelka,zemSirka,header,data,mesto,data_old):
 
     return data_old
 
-
-
-
-
-def start_blob(id,stanice,zemDelka,zemSirka,header,data,mesto):
-    new_columns = ["id","stanice","zemepisna delka", "zemepisna sirka", "mesto"]
+def start_blob():
+    new_columns = ['Rok', 'Mesic', 'Den', 'Hodnota', 'Priznak', 'id', 'stanice', 'zemepisna delka', 'zemepisna sirka', 'mesto']
+    header = []
     for i in new_columns:
         header.append(i)
     
     final_data = []
     final_data.append(header)
-    print(final_data)
 
     return final_data
     
- 
 def write(file_name,data):
-    # Create and write to the CSV file with a semicolon delimiter
     with open(file_name, mode="w", newline="") as file:
         writer = csv.writer(file, delimiter=";")
-        # Write the data row by row
         writer.writerows(data)
 
-def start_csv(r_path):
-    tables = []
-    csv_to_table_class(r_path,tables,True)
-    #printount_tables(tables)
-    meta = get_meta(tables)
-    file = start_blob(*meta,"Plzen")
+def start_csv():
+    file = start_blob()
     return file
 
 def add_to_csv(path,old_data):
@@ -146,9 +129,7 @@ def add_to_csv(path,old_data):
 if __name__ == "__main__":
     paths = ['./test/C1HKVI01_T_N_clear.csv', './test/C1HRAS01_T_N_clear.csv']
     
-    file = start_csv(paths[0])
-
-    
+    file = start_csv()
 
     for i in paths:
         file = add_to_csv(i,file)
