@@ -44,15 +44,26 @@ def unzip_zip_files(folder_path):
     
     return paths
 
+
+def clear_to_folder(folder_path):
 # Example usage:
-folder_path = "./test/"
-paths = unzip_zip_files(folder_path)
-print(paths)
+    
+    paths = unzip_zip_files(folder_path)
+    print(paths)
 
+    clear_path_list = []
 
-for i in paths:
-    f = open(i.replace(".csv","_v2.csv"), "a")
-    write = read_replace_wrongs(i)
-    print(write)
-    f.write(write)
-    f.close()
+    for i in paths:
+        f = open(i.replace(".csv","_clear.csv"), "a")
+        clear_path_list.append(i)
+        write = read_replace_wrongs(i)
+        print(write)
+        f.write(write)
+        f.close()
+
+    return clear_path_list
+
+if __name__ == "__main__":
+    folder_path = "./test/"
+    paths = clear_to_folder(folder_path)
+    print(paths)
