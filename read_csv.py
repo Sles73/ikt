@@ -32,7 +32,6 @@ def csv_to_table_class(path,tables,limiter=False):
                     continue
                 
                 if new_segment:
-                    print(len(tables))
                     tables.append(Table(data))
                     new_segment = False
                     new_header = True
@@ -68,7 +67,7 @@ def printount_tables(tables_in):
 def get_meta(tables):
     for i in tables:
         if i.name == "METADATA":
-            print(i.data[1])
+            #print(i.data[1])
             id = i.data[1][0]
             stanice = i.data[1][1]
             zemDelka = i.data[1][4]
@@ -82,28 +81,20 @@ def get_meta(tables):
     return [id,stanice,zemDelka,zemSirka,header,data]
 
 def make_blob(id,stanice,zemDelka,zemSirka,header,data,mesto,data_old):
-    print(f"id: {id}")
-    print(f"stanice: {stanice}")
-    print(f"zemDelka: {zemDelka}")
-    print(f"zemSirka: {zemSirka}")
-    print(f"header: {header}")
+    # print(f"id: {id}")
+    # print(f"stanice: {stanice}")
+    # print(f"zemDelka: {zemDelka}")
+    # print(f"zemSirka: {zemSirka}")
+    # print(f"header: {header}")
 
-    
     new_data = [id,stanice,zemDelka,zemSirka,mesto]
-
     final_data = []
-    
-
-    final_data.append(header)
-    print(final_data)
-    
-    print(data)
 
     for i in data:
         for j in new_data:
             i.append(j)
         final_data.append(i)
-        print(i)
+        #print(i)
 
     for i in final_data:
         data_old.append(i)
@@ -143,7 +134,7 @@ def start_csv(r_path):
 
 def add_to_csv(path,old_data):
     tables = []
-    csv_to_table_class(path,tables,True)
+    csv_to_table_class(path,tables)
     #printount_tables(tables)
     meta = get_meta(tables)
     new_data = make_blob(*meta,"Plzen",old_data)
