@@ -55,7 +55,7 @@ def clear_to_folder(folder_path):
 
     for i in paths:
         f = open(i.replace(".csv","_clear.csv"), "a")
-        clear_path_list.append(i)
+        clear_path_list.append(f)
         write = read_replace_wrongs(i)
         print(write)
         f.write(write)
